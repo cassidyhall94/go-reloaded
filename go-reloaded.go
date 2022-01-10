@@ -24,28 +24,24 @@ func main() {
 func hex() {
 	hex_num := "ab1"
 	num, err := strconv.ParseInt(hex_num, 16, 64)
-   
 	if err != nil {
-	  panic(err)
+		panic(err)
 	}
-   
-	fmt.Println("decimal num: ", num)
-   
+
+	fmt.Println(num)
+
 	hex_num = "12"
 	num, err = strconv.ParseInt(hex_num, 16, 64)
 
 	if err != nil {
-	  panic(err)
+		panic(err)
 	}
-	fmt.Println("decimal num: ", num)
-   
+	fmt.Println(num)
+
 	hex_num = "ffff"
 	num, err = strconv.ParseInt(hex_num, 16, 64)
 	if err != nil {
-   
-	  panic(err)
-   
+		panic(err)
 	}
-	fmt.Println("decimal num: ", num)
-  }
+	fmt.Println(num)
 }
