@@ -66,167 +66,125 @@ func Test_bin(t *testing.T) {
 	}
 }
 
-func Test_lower(t *testing.T) {
-	test1, err := lower([]rune{'A'})
-	if err != nil {
-		t.Log(err.Error())
-		t.Fail()
-	} else if !reflect.DeepEqual(test1, []rune{'a'}) {
-		t.Logf("lower([]rune{'A'}) failed, wanted %v, got %v", []rune{'a'}, test1)
-		t.Fail()
-	}
-
-	test2, err := lower([]rune{'1'})
-	if err == nil {
-		t.Logf("lower([]rune{'1'} failed, wanted err, got test2 == %v", test2)
-		t.Fail()
-	}
-
-	test3, err := lower([]rune{'T', 'H', 'E'})
-	if err != nil {
-		t.Log(err.Error())
-		t.Fail()
-	} else if !reflect.DeepEqual(test1, []rune{'t', 'h', 'e'}) {
-		t.Logf("lower([]rune{'T', 'H', 'E'}) failed, wanted %v, got %v", []rune{'t', 'h', 'e'}, test3)
-		t.Fail()
-	}
-}
-
-func Test_upper(t *testing.T) {
-	test1, err := upper([]rune{'a'})
-	if err != nil {
-		t.Log(err.Error())
-		t.Fail()
-	} else if !reflect.DeepEqual(test1, []rune{'A'}) {
-		t.Logf("upper([]rune{'a'}) failed, wanted %v, got %v", []rune{'A'}, test1)
-		t.Fail()
-	}
-
-	test2, err := upper([]rune{'1'})
-	if err == nil {
-		t.Logf("upper([]rune{'1'} failed, wanted err, got test2 == %v", test2)
-		t.Fail()
-	}
-
-	test3, err := upper([]rune{'t', 'i', 'm', 'e'})
-	if err != nil {
-		t.Log(err.Error())
-		t.Fail()
-	} else if !reflect.DeepEqual(test1, []rune{'T', 'I', 'M', 'E'}) {
-		t.Logf("upper([]rune{'t', 'i', 'm', 'e'}) failed, wanted %v, got %v", []rune{'T', 'I', 'M', 'E'}, test3)
-		t.Fail()
-	}
-}
-
 func Test_cap(t *testing.T) {
-	test1, err := cap([]rune{'i', 't'})
-	if err != nil {
-		t.Log(err.Error())
-		t.Fail()
-	} else if !reflect.DeepEqual(test1, []rune{'I', 't'}) {
+	test1 := cap([]rune{'i', 't'})
+	if !reflect.DeepEqual(test1, []rune{'I', 't'}) {
 		t.Logf("cap([]rune{'i', 't'}) failed, wanted %v, got %v", []rune{'I', 't'}, test1)
 		t.Fail()
 	}
 
-	test2, err := cap([]rune{'1'})
-	if err == nil {
-		t.Logf("cap([]rune{'1'} failed, wanted err, got test2 == %v", test2)
+	test2 := lower([]rune{'1'})
+	if !reflect.DeepEqual(test2, []rune{}) {
+		t.Logf("cap([]rune{'1'}) failed, wanted %v, got %v", []rune{}, test2)
 		t.Fail()
 	}
 
-	test3, err := cap([]rune{'t', 'i', 'm', 'e'})
-	if err != nil {
-		t.Log(err.Error())
-		t.Fail()
-	} else if !reflect.DeepEqual(test1, []rune{'T', 'i', 'm', 'e'}) {
+	test3 := cap([]rune{'t', 'i', 'm', 'e'})
+	if !reflect.DeepEqual(test3, []rune{'T', 'i', 'm', 'e'}) {
 		t.Logf("cap([]rune{'t', 'i', 'm', 'e'}) failed, wanted %v, got %v", []rune{'T', 'i', 'm', 'e'}, test3)
 		t.Fail()
 	}
 }
 
-func Test_a(t *testing.T) {
-	test1, err := a([]rune{'a'})
-	if err != nil {
-		t.Log(err.Error())
+func Test_lower(t *testing.T) {
+	test1 := lower([]rune{'A'})
+	if !reflect.DeepEqual(test1, []rune{'a'}) {
+		t.Logf("lower([]rune{'A'}) failed, wanted %v, got %v", []rune{'a'}, test1)
 		t.Fail()
-	} else if !reflect.DeepEqual(test1, []rune{'a', 'n'}) {
+	}
+
+	test2 := lower([]rune{'T', 'H', 'E'})
+	if !reflect.DeepEqual(test2, []rune{'t', 'h', 'e'}) {
+		t.Logf("lower([]rune{'T', 'H', 'E'}) failed, wanted %v, got %v", []rune{'t', 'h', 'e'}, test2)
+		t.Fail()
+	}
+
+	test3 := lower([]rune{'1'})
+	if !reflect.DeepEqual(test3, []rune{}) {
+		t.Logf("lower([]rune{'1'}) failed, wanted %v, got %v", []rune{}, test3)
+		t.Fail()
+	}
+}
+
+func Test_upper(t *testing.T) {
+	test1 := upper([]rune{'a'})
+	if !reflect.DeepEqual(test1, []rune{'A'}) {
+		t.Logf("upper([]rune{'a'}) failed, wanted %v, got %v", []rune{'A'}, test1)
+		t.Fail()
+	}
+
+	test2 := lower([]rune{'1'})
+	if !reflect.DeepEqual(test2, []rune{}) {
+		t.Logf("upper([]rune{'1'}) failed, wanted %v, got %v", []rune{}, test2)
+		t.Fail()
+	}
+
+	test3 := upper([]rune{'t', 'i', 'm', 'e'})
+	if !reflect.DeepEqual(test3, []rune{'T', 'I', 'M', 'E'}) {
+		t.Logf("upper([]rune{'t', 'i', 'm', 'e'}) failed, wanted %v, got %v", []rune{'T', 'I', 'M', 'E'}, test3)
+		t.Fail()
+	}
+}
+
+func Test_a(t *testing.T) {
+	test1 := a([]rune{'a'})
+	if !reflect.DeepEqual(test1, []rune{'a', 'n'}) {
 		t.Logf("a([]rune{'a'}) failed, wanted %v, got %v", []rune{'a', 'n'}, test1)
 		t.Fail()
 	}
 
-	test2, err := a([]rune{'1'})
-	if err == nil {
-		t.Logf("a([]rune{'1'} failed, wanted err, got test2 == %v", test2)
+	test2 := a([]rune{'1'})
+	if !reflect.DeepEqual(test2, []rune{}) {
+		t.Logf("a([]rune{'1'}) failed, wanted %v, got %v", []rune{}, test2)
 		t.Fail()
 	}
 
-	test3, err := a([]rune{'A'})
-	if err != nil {
-		t.Log(err.Error())
-		t.Fail()
-	} else if !reflect.DeepEqual(test1, []rune{'A', 'n'}) {
+	test3 := a([]rune{'A'})
+	if !reflect.DeepEqual(test3, []rune{'A', 'n'}) {
 		t.Logf("a([]rune{'A'}) failed, wanted %v, got %v", []rune{'A', 'n'}, test3)
 		t.Fail()
 	}
 }
 
 func Test_punc(t *testing.T) {
-	test1, err := punc([]rune{' ', ','})
-	if err != nil {
-		t.Log(err.Error())
-		t.Fail()
-	} else if !reflect.DeepEqual(test1, []rune{',', ' '}) {
+	test1 := punc([]rune{' ', ','})
+	if !reflect.DeepEqual(test1, []rune{',', ' '}) {
 		t.Logf("punc([]rune{' ', ','}) failed, wanted %v, got %v", []rune{',', ' '}, test1)
 		t.Fail()
 	}
 
-	test2, err := punc([]rune{','})
-	if err == nil {
-		t.Logf("punc([]rune{','} failed, wanted err, got test2 == %v", test2)
+	test2 := punc([]rune{' ', '.', '.', '.', ' '})
+	if !reflect.DeepEqual(test2, []rune{'.', '.', '.', ' '}) {
+		t.Logf("punc([]rune{' ', '.', '.', '.', ' '}) failed, wanted %v, got %v", []rune{'.', '.', '.', ' '}, test2)
 		t.Fail()
 	}
 
-	test3, err := punc([]rune{' ', '.'})
-	if err != nil {
-		t.Log(err.Error())
-		t.Fail()
-	} else if !reflect.DeepEqual(test3, []rune{'.', ' '}) {
+	test3 := punc([]rune{' ', '.'})
+	if !reflect.DeepEqual(test3, []rune{'.', ' '}) {
 		t.Logf("punc([]rune{' ', '.'}) failed, wanted %v, got %v", []rune{'.', ' '}, test3)
 		t.Fail()
 	}
 
-	test4, err := punc([]rune{' ', '!'})
-	if err != nil {
-		t.Log(err.Error())
-		t.Fail()
-	} else if !reflect.DeepEqual(test4, []rune{'!', ' '}) {
+	test4 := punc([]rune{' ', '!'})
+	if !reflect.DeepEqual(test4, []rune{'!', ' '}) {
 		t.Logf("punc([]rune{' ', '!'}) failed, wanted %v, got %v", []rune{'!', ' '}, test4)
 		t.Fail()
 	}
 
-	test5, err := punc([]rune{' ', '?'})
-	if err != nil {
-		t.Log(err.Error())
-		t.Fail()
-	} else if !reflect.DeepEqual(test5, []rune{'?', ' '}) {
+	test5 := punc([]rune{' ', '?'})
+	if !reflect.DeepEqual(test5, []rune{'?', ' '}) {
 		t.Logf("punc([]rune{' ', '?'}) failed, wanted %v, got %v", []rune{'?', ' '}, test5)
 		t.Fail()
 	}
 
-	test6, err := punc([]rune{' ', ':'})
-	if err != nil {
-		t.Log(err.Error())
-		t.Fail()
-	} else if !reflect.DeepEqual(test6, []rune{':', ' '}) {
+	test6 := punc([]rune{' ', ':'})
+	if !reflect.DeepEqual(test6, []rune{':', ' '}) {
 		t.Logf("punc([]rune{' ', ':'}) failed, wanted %v, got %v", []rune{':', ' '}, test6)
 		t.Fail()
 	}
 
-	test7, err := punc([]rune{' ', ';'})
-	if err != nil {
-		t.Log(err.Error())
-		t.Fail()
-	} else if !reflect.DeepEqual(test7, []rune{';', ' '}) {
+	test7 := punc([]rune{' ', ';'})
+	if !reflect.DeepEqual(test7, []rune{';', ' '}) {
 		t.Logf("punc([]rune{' ', ';'}) failed, wanted %v, got %v", []rune{';', ' '}, test7)
 		t.Fail()
 	}
