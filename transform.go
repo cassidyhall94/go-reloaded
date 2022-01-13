@@ -97,39 +97,44 @@ func a(arunes []rune) []rune {
 // if there's a puncuation mark, append to result
 // add space to end of result and return result
 
-
 func punc(puncrunes []rune) []rune {
 	result := []rune{}
 	for i := range puncrunes {
-		if puncrunes[i] == rune(32) && puncrunes[i+1] == rune(46) {
+		if puncrunes[i] == rune(46) {
 			result = append(result, rune(46))
 		}
-		if puncrunes[i] == rune(32) && puncrunes[i+1] == rune(44) {
-			return []rune{44, 32}
+		if puncrunes[i] == rune(44) {
+			result = append(result, rune(44))
 		}
-		if puncrunes[i] == rune(32) && puncrunes[i+1] == rune(33) {
-			return []rune{33, 32}
+		if puncrunes[i] == rune(33) {
+			result = append(result, rune(33))
 		}
-		if puncrunes[i] == rune(32) && puncrunes[i+1] == rune(63) {
-			return []rune{63, 32}
+		if puncrunes[i] == rune(63) {
+			result = append(result, rune(63))
 		}
-		if puncrunes[i] == rune(32) && puncrunes[i+1] == rune(58) {
-			return []rune{58, 32}
+		if puncrunes[i] == rune(58) {
+			result = append(result, rune(58))
 		}
-		if puncrunes[i] == rune(32) && puncrunes[i+1] == rune(59) {
-			return []rune{59, 32}
+		if puncrunes[i] == rune(59) {
+			result = append(result, rune(59))
 		}
-		if puncrunes[i] == rune(32) && puncrunes[i+1] == rune(39) {
-			return []rune{39, 32}
-		}
-	//	if puncrunes[i] == rune(32) && puncrunes[i+1] == rune(46) && puncrunes[i+2] == rune(46) && puncrunes[i+3] == rune(46) && puncrunes[i+4] == rune(32) {
-	//		return []rune{46, 46, 46, 32}
-	//	}
 	}
 	result = append(result, rune(32))
-	return []rune{}
+	return result
 }
 
-func apos(puncrunes []rune) ([]rune, error) {
-	return nil, nil
+// starting with an empty slice of runes as result
+// for each element in the rune slice, if there's a space, ignore it.
+// if there's a puncuation mark, append to result
+// add space to end of result and return result
+
+func apos(aposrunes []rune) []rune {
+	result := []rune{}
+	for i := range aposrunes {
+		if aposrunes[i] == rune(39) {
+			result = append(result, rune(39))
+		}
+	}
+	result = append(result)
+	return result
 }

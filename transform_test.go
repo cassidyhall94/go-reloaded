@@ -188,39 +188,30 @@ func Test_punc(t *testing.T) {
 		t.Logf("punc([]rune{' ', ';'}) failed, wanted %v, got %v", []rune{';', ' '}, test7)
 		t.Fail()
 	}
+
+	test8 := punc([]rune{' ', '!', '?', ' '})
+	if !reflect.DeepEqual(test8, []rune{'!', '?', ' '}) {
+		t.Logf("punc([]rune{' ', '!', '?', ' '}) failed, wanted %v, got %v", []rune{'!', '?', ' '}, test8)
+		t.Fail()
+	}
 }
 
 func Test_apos(t *testing.T) {
-	test1, err := apos([]rune{32, 39, 39, 32})
-	if err != nil {
-		t.Log(err.Error())
-		t.Fail()
-	} else if !reflect.DeepEqual(test1, []rune{39, 39}) {
+	test1 := apos([]rune{32, 39, 39, 32})
+	if !reflect.DeepEqual(test1, []rune{39, 39}) {
 		t.Logf("apos([]rune{' ', ''', ''', ' '}) failed, wanted %v, got %v", []rune{39, 39}, test1)
 		t.Fail()
 	}
 
-	test2, err := apos([]rune{39})
-	if err == nil {
-		t.Logf("apos([]rune{'''} failed, wanted err, got test2 == %v", test2)
+	test2 := apos([]rune{39, 39, 32})
+	if !reflect.DeepEqual(test2, []rune{39, 39}) {
+		t.Logf("apos([]rune{''', ''', ' '}) failed, wanted %v, got %v", []rune{39, 39}, test2)
 		t.Fail()
 	}
 
-	test3, err := apos([]rune{39, 39, 32})
-	if err != nil {
-		t.Log(err.Error())
-		t.Fail()
-	} else if !reflect.DeepEqual(test3, []rune{39, 39}) {
-		t.Logf("apos([]rune{''', ''', ' '}) failed, wanted %v, got %v", []rune{39, 39}, test3)
-		t.Fail()
-	}
-
-	test4, err := apos([]rune{32, 39, 39})
-	if err != nil {
-		t.Log(err.Error())
-		t.Fail()
-	} else if !reflect.DeepEqual(test4, []rune{39, 39}) {
-		t.Logf("apos([]rune{'', ''', '''}) failed, wanted %v, got %v", []rune{39, 39}, test4)
+	test3 := apos([]rune{32, 39, 39})
+	if !reflect.DeepEqual(test3, []rune{39, 39}) {
+		t.Logf("apos([]rune{'', ''', '''}) failed, wanted %v, got %v", []rune{39, 39}, test3)
 		t.Fail()
 	}
 }
