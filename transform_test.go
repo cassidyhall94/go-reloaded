@@ -73,9 +73,9 @@ func Test_cap(t *testing.T) {
 		t.Fail()
 	}
 
-	test2 := lower([]rune{'1'})
-	if !reflect.DeepEqual(test2, []rune{}) {
-		t.Logf("cap([]rune{'1'}) failed, wanted %v, got %v", []rune{}, test2)
+	test2 := cap([]rune{'1'})
+	if !reflect.DeepEqual(test2, []rune{'1'}) {
+		t.Logf("cap([]rune{'1'}) failed, wanted %v, got %v", []rune{'1'}, test2)
 		t.Fail()
 	}
 
@@ -99,9 +99,9 @@ func Test_lower(t *testing.T) {
 		t.Fail()
 	}
 
-	test3 := lower([]rune{'1'})
-	if !reflect.DeepEqual(test3, []rune{}) {
-		t.Logf("lower([]rune{'1'}) failed, wanted %v, got %v", []rune{}, test3)
+	test3 := lower([]rune{'!'})
+	if !reflect.DeepEqual(test3, []rune{'!'}) {
+		t.Logf("lower([]rune{'!'}) failed, wanted %v, got %v", []rune{'!'}, test3)
 		t.Fail()
 	}
 }
@@ -113,9 +113,9 @@ func Test_upper(t *testing.T) {
 		t.Fail()
 	}
 
-	test2 := lower([]rune{'1'})
-	if !reflect.DeepEqual(test2, []rune{}) {
-		t.Logf("upper([]rune{'1'}) failed, wanted %v, got %v", []rune{}, test2)
+	test2 := upper([]rune{'1'})
+	if !reflect.DeepEqual(test2, []rune{'1'}) {
+		t.Logf("upper([]rune{'1'}) failed, wanted %v, got %v", []rune{'1'}, test2)
 		t.Fail()
 	}
 
@@ -194,6 +194,12 @@ func Test_punc(t *testing.T) {
 		t.Logf("punc([]rune{' ', '!', '?', ' '}) failed, wanted %v, got %v", []rune{'!', '?', ' '}, test8)
 		t.Fail()
 	}
+
+	test9 := punc([]rune{' ', 'a'})
+	if !reflect.DeepEqual(test9, []rune{}) {
+		t.Logf("punc([]rune{' ', 'a'}) failed, wanted %v, got %v", []rune{}, test9)
+		t.Fail()
+	}
 }
 
 func Test_apos(t *testing.T) {
@@ -211,7 +217,13 @@ func Test_apos(t *testing.T) {
 
 	test3 := apos([]rune{32, 39, 39})
 	if !reflect.DeepEqual(test3, []rune{39, 39}) {
-		t.Logf("apos([]rune{'', ''', '''}) failed, wanted %v, got %v", []rune{39, 39}, test3)
+		t.Logf("apos([]rune{' ', ''', '''}) failed, wanted %v, got %v", []rune{39, 39}, test3)
+		t.Fail()
+	}
+
+	test4 := apos([]rune{32, 'a'})
+	if !reflect.DeepEqual(test4, []rune{}) {
+		t.Logf("apos([]rune{' ', 'a'}) failed, wanted %v, got %v", []rune{}, test4)
 		t.Fail()
 	}
 }

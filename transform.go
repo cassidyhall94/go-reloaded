@@ -57,26 +57,21 @@ func cap(caprunes []rune) []rune {
 }
 
 func lower(lowerrunes []rune) []rune {
-	result := lowerrunes
-	for i := range result {
-		if result[i] >= rune(48) && result[i] <= rune(57) {
-			return []rune{}
-		}
-		if result[i] >= rune(65) && result[i] <= rune(90) {
-			result[i] = result[i] + 32
+	for i := range lowerrunes {
+		if lowerrunes[i] >= rune(65) && lowerrunes[i] <= rune(90) {
+			lowerrunes[i] = lowerrunes[i] + 32
 		}
 	}
-	return result
+	return lowerrunes
 }
 
 func upper(upperrunes []rune) []rune {
-	result := upperrunes
-	for i := range result {
-		if result[i] >= rune(97) && result[i] <= rune(122) {
-			result[i] = result[i] - 32
+	for i := range upperrunes {
+		if upperrunes[i] >= rune(97) && upperrunes[i] <= rune(122) {
+			upperrunes[i] = upperrunes[i] - 32
 		}
 	}
-	return result
+	return upperrunes
 }
 
 func a(arunes []rune) []rune {
@@ -119,7 +114,9 @@ func punc(puncrunes []rune) []rune {
 			result = append(result, rune(59))
 		}
 	}
-	result = append(result, rune(32))
+	if string(result) != "" {
+		result = append(result, rune(32))
+	}
 	return result
 }
 
