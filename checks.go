@@ -45,19 +45,24 @@ func checkbin(s string) (string, error) {
 	return strings.Join(splitS, " "), nil
 }
 
-func checkupper(s string) string {
-	splitS := strings.Split(s, " ")
+// checkupper looks for any instances of (up) and replaces the string before with uppercase letters
+// checkupper looks for any instances of (up, n) and replaces n strings before with uppercase letters
 
-	for i := range splitS {
+func checkupper(s string) string {
+	splitS := strings.Split(s, " ") // splits string by a space
+
+	for i := range splitS { 
 		if i == 0 {
 			continue
 		} else if len(splitS) == i {
 			break
 		}
-		// need to add the period after TIMES for test 7: look for func in https://pkg.go.dev/strings#example-Contains library
-		if isLower(splitS[i-1]) && strings.Contains(splitS[i], "(up)") {
-			result := upper([]rune(splitS[i-1]))
-			splitS[i-1] = string(result)
+		// we extract n from (up, n) in the string using a var called n
+		// instead of i, we use n to represent a range of indexes of the string that is transformed
+		// when we want to get our range of splitS, we use splitS[i-n:i]
+		if isLower(strings.Join(splitS[i-n:i], "")) && strings.Contains(splitS[i], "(up)") {
+			result := upper([]rune(splitS[i-n:i]))
+			splitS[i-n:i] = string(result)
 			splitS = removeIndex(splitS, i)
 		}
 	}
@@ -68,6 +73,36 @@ func isLower(s string) bool {
 	counter := 0
 	for _, stringrune := range s {
 		if (stringrune >= rune(97)) && (stringrune <= rune(122)) {
+			counter++
+		} else {
+			return false
+		}
+	}
+	return true
+}
+
+func checklower(s string) string {
+	splitS := strings.Split(s, " ")
+
+	for i := range splitS {
+		if i == 0 {
+			continue
+		} else if len(splitS) == i {
+			break
+		}
+		if isUpper(splitS[i-1]) && strings.Contains(splitS[i], "(low)") {
+			result := lower([]rune(splitS[i-1]))
+			splitS[i-1] = string(result)
+			splitS = removeIndex(splitS, i)
+		}
+	}
+	return strings.Join(splitS, " ")
+}
+
+func isUpper(s string) bool {
+	counter := 0
+	for _, stringrune := range []rune(s) {
+		if (stringrune >= rune(65)) && (stringrune <= rune(90)) {
 			counter++
 		} else {
 			return false

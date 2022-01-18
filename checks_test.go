@@ -156,41 +156,81 @@ func Test_checkbin(t *testing.T) {
 }
 
 func Test_checkupper(t *testing.T) {
-	// test1 := checkupper("hey (up)")
-	// if !reflect.DeepEqual(test1, "HEY") {
-	// 	t.Logf("checkupper(\"hey (up)\") failed, wanted \"%v\", got \"%v\"", "HEY", test1)
-	// 	t.Fail()
-	// }
+	test1 := checkupper("hey (up)")
+	if !reflect.DeepEqual(test1, "HEY") {
+		t.Logf("checkupper(\"hey (up)\") failed, wanted \"%v\", got \"%v\"", "HEY", test1)
+		t.Fail()
+	}
 
-	// test2 := checkupper("Ready, set, go (up) !")
-	// if !reflect.DeepEqual(test2, "Ready, set, GO !") {
-	// 	t.Logf("checkupper(\"Ready, set, go (up) !\") failed, wanted \"%v\", got \"%v\"", "Ready, set, GO !", test2)
-	// 	t.Fail()
-	// }
+	test2 := checkupper("Ready, set, go (up, 2) !")
+	if !reflect.DeepEqual(test2, "Ready, SET, GO !") {
+		t.Logf("checkupper(\"Ready, set, go (up, 2) !\") failed, wanted \"%v\", got \"%v\"", "Ready, SET, GO !", test2)
+		t.Fail()
+	}
 
-	// test3 := checkupper("42 (up)")
-	// if !reflect.DeepEqual(test3, "42 (up)") {
-	// 	t.Logf("checkupper(\"42 (up)\") failed, wanted \"%v\", got \"%v\"", "42 (up)", test3)
-	// 	t.Fail()
-	// }
+	test3 := checkupper("42 (up)")
+	if !reflect.DeepEqual(test3, "42 (up)") {
+		t.Logf("checkupper(\"42 (up)\") failed, wanted \"%v\", got \"%v\"", "42 (up)", test3)
+		t.Fail()
+	}
 
-	// test4 := checkupper("hey up")
-	// if !reflect.DeepEqual(test4, "hey up") {
-	// 	t.Logf("checkupper(\"hey up\") failed, wanted \"%v\", got \"%v\"", "hey up", test4)
-	// 	t.Fail()
-	// }
+	test4 := checkupper("hey up")
+	if !reflect.DeepEqual(test4, "hey up") {
+		t.Logf("checkupper(\"hey up\") failed, wanted \"%v\", got \"%v\"", "hey up", test4)
+		t.Fail()
+	}
 
-	// test6 := checkupper("HEY (up)")
-	// if !reflect.DeepEqual(test6, "HEY (up)") {
-	// 	t.Logf("checkupper(\"HEY (up)\") failed, wanted \"%v\", got \"%v\"", "Hey (up)", test6)
-	// 	t.Fail()
-	// }
+	test6 := checkupper("HEY (up)")
+	if !reflect.DeepEqual(test6, "HEY (up)") {
+		t.Logf("checkupper(\"HEY (up)\") failed, wanted \"%v\", got \"%v\"", "HEY (up)", test6)
+		t.Fail()
+	}
 
-	test7In := "it was the best of times, it was the worst of times (up)."
-	test7Want := "it was the best of times, it was the worst of TIMES."
+	test7In := "it was the best of times, it was the worst of times (up) ,"
+	test7Want := "it was the best of times, it was the worst of TIMES ,"
 	test7 := checkupper(test7In)
 	if !reflect.DeepEqual(test7, test7Want) {
 		t.Logf("checkupper(\"%s\") failed, wanted \"%s\", got \"%s\"", test7In, test7Want, test7)
+		t.Fail()
+	}
+}
+
+func Test_checklower(t *testing.T) {
+	test1 := checklower("HEY (low)")
+	if !reflect.DeepEqual(test1, "hey") {
+		t.Logf("checklower(\"HEY (low)\") failed, wanted \"%v\", got \"%v\"", "hey", test1)
+		t.Fail()
+	}
+
+	test2 := checklower("Ready, set, GO (low) !")
+	if !reflect.DeepEqual(test2, "Ready, set, go !") {
+		t.Logf("checklower(\"Ready, set, GO (low) !\") failed, wanted \"%v\", got \"%v\"", "Ready, set, go !", test2)
+		t.Fail()
+	}
+
+	test3 := checklower("42 (low)")
+	if !reflect.DeepEqual(test3, "42 (low)") {
+		t.Logf("checklower(\"42 (low)\") failed, wanted \"%v\", got \"%v\"", "42 (low)", test3)
+		t.Fail()
+	}
+
+	test4 := checklower("hey low")
+	if !reflect.DeepEqual(test4, "hey low") {
+		t.Logf("checklower(\"hey low\") failed, wanted \"%v\", got \"%v\"", "hey low", test4)
+		t.Fail()
+	}
+
+	test6 := checklower("hey (low)")
+	if !reflect.DeepEqual(test6, "hey (low)") {
+		t.Logf("checklower(\"hey (low)\") failed, wanted \"%v\", got \"%v\"", "hey (low)", test6)
+		t.Fail()
+	}
+
+	test7In := "it was the best of times, it was the worst of TIMES (low) ,"
+	test7Want := "it was the best of times, it was the worst of times ,"
+	test7 := checklower(test7In)
+	if !reflect.DeepEqual(test7, test7Want) {
+		t.Logf("checklower(\"%s\") failed, wanted \"%s\", got \"%s\"", test7In, test7Want, test7)
 		t.Fail()
 	}
 }
