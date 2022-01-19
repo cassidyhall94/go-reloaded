@@ -132,6 +132,6 @@ func apos(aposrunes []rune) []rune {
 			result = append(result, rune(39))
 		}
 	}
-	result = append(result)
+	// result = append(result)
 	return result
 }

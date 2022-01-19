@@ -162,11 +162,11 @@ func Test_checkupper(t *testing.T) {
 		t.Fail()
 	}
 
-	test2 := checkupper("Ready, set, go (up, 2) !")
-	if !reflect.DeepEqual(test2, "Ready, SET, GO !") {
-		t.Logf("checkupper(\"Ready, set, go (up, 2) !\") failed, wanted \"%v\", got \"%v\"", "Ready, SET, GO !", test2)
-		t.Fail()
-	}
+	// test2 := checkupper("Ready, set, go (up, 2) !")
+	// if !reflect.DeepEqual(test2, "Ready, SET, GO !") {
+	// 	t.Logf("checkupper(\"Ready, set, go (up, 2) !\") failed, wanted \"%v\", got \"%v\"", "Ready, SET, GO !", test2)
+	// 	t.Fail()
+	// }
 
 	test3 := checkupper("42 (up)")
 	if !reflect.DeepEqual(test3, "42 (up)") {
@@ -231,6 +231,14 @@ func Test_checklower(t *testing.T) {
 	test7 := checklower(test7In)
 	if !reflect.DeepEqual(test7, test7Want) {
 		t.Logf("checklower(\"%s\") failed, wanted \"%s\", got \"%s\"", test7In, test7Want, test7)
+		t.Fail()
+	}
+}
+
+func Test_checkN(t *testing.T) {
+	test1 := checkN("HEY THERE (low, 2)")
+	if !reflect.DeepEqual(test1, "hey there") {
+		t.Logf("checkN(\"HEY THERE (low, 2)\") failed, wanted \"%v\", got \"%v\"", "hey there", test1)
 		t.Fail()
 	}
 }

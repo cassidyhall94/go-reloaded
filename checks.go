@@ -46,39 +46,23 @@ func checkbin(s string) (string, error) {
 }
 
 // checkupper looks for any instances of (up) and replaces the string before with uppercase letters
-// checkupper looks for any instances of (up, n) and replaces n strings before with uppercase letters
 
 func checkupper(s string) string {
-	splitS := strings.Split(s, " ") // splits string by a space
+	splitS := strings.Split(s, " ")
 
-	for i := range splitS { 
+	for i := range splitS {
 		if i == 0 {
 			continue
 		} else if len(splitS) == i {
 			break
 		}
-		// we extract n from (up, n) in the string using a var called n
-		// instead of i, we use n to represent a range of indexes of the string that is transformed
-		// when we want to get our range of splitS, we use splitS[i-n:i]
-		if isLower(strings.Join(splitS[i-n:i], "")) && strings.Contains(splitS[i], "(up)") {
-			result := upper([]rune(splitS[i-n:i]))
-			splitS[i-n:i] = string(result)
+		if isLower(splitS[i-1]) && strings.Contains(splitS[i], "(up") {
+			result := upper([]rune(splitS[i-1]))
+			splitS[i-1] = string(result)
 			splitS = removeIndex(splitS, i)
 		}
 	}
 	return strings.Join(splitS, " ")
-}
-
-func isLower(s string) bool {
-	counter := 0
-	for _, stringrune := range s {
-		if (stringrune >= rune(97)) && (stringrune <= rune(122)) {
-			counter++
-		} else {
-			return false
-		}
-	}
-	return true
 }
 
 func checklower(s string) string {
@@ -99,9 +83,90 @@ func checklower(s string) string {
 	return strings.Join(splitS, " ")
 }
 
+func checkcap(s string) string {
+	splitS := strings.Split(s, " ")
+
+	for i := range splitS {
+		if i == 0 {
+			continue
+		} else if len(splitS) == i {
+			break
+		}
+		if isUpper(splitS[i-1]) && strings.Contains(splitS[i], "(cap)") {
+			result := cap([]rune(splitS[i-1]))
+			splitS[i-1] = string(result)
+			splitS = removeIndex(splitS, i)
+		}
+	}
+	return strings.Join(splitS, " ")
+}
+
+// loop through string, looking for (low/up/cap, n) and when found it implements the respective func for n strings before it
+
+func checkN(N string) string {
+	splitS := strings.Split(N, " ")
+
+	for i := range splitS {
+		if i == 0 {
+			continue
+		} else if len(splitS) == i+1 {
+			break
+		}
+		if IsNumeric(splitS[i+1]) && strings.Contains(splitS[i], ", ") {
+			if strings.Contains(splitS[i], "(low") {
+				result := lower([]rune(splitS[i-1]))
+				splitS[i] = string(result)
+				splitS = removeIndex(splitS, i)
+				splitS = removeIndex(splitS, i+1)
+			}
+			if strings.Contains(splitS[i], "(up") {
+				result := upper([]rune(splitS[i-1]))
+				splitS[i] = string(result)
+				splitS = removeIndex(splitS, i)
+				splitS = removeIndex(splitS, i+1)
+			}
+			// if strings.Contains(splitS[i], "(cap") {
+			// 	result := cap([]rune(splitS[i-1]))
+			// 	splitS[i] = string(result)
+			// 	splitS = removeIndex(splitS, i)
+			// 	splitS = removeIndex(splitS, i+1)
+			// }
+
+		}
+	}
+	return strings.Join(splitS, " ")
+}
+
+// func isCap(s string) bool {
+// 	counter := 0
+// 	for _, stringrune := range s {
+// 		if (stringrune >= rune(65)) && (stringrune <= rune(90)) {
+// 			continue
+// 		}
+// 			if (stringrune[i+1] >= rune(97)) && (stringrune[i+1] <= rune(122)) {
+// 			counter++
+// 		} else {
+// 			return false
+// 		}
+// 	}
+// 	return true
+// }
+
+func isLower(s string) bool {
+	counter := 0
+	for _, stringrune := range s {
+		if (stringrune >= rune(97)) && (stringrune <= rune(122)) {
+			counter++
+		} else {
+			return false
+		}
+	}
+	return true
+}
+
 func isUpper(s string) bool {
 	counter := 0
-	for _, stringrune := range []rune(s) {
+	for _, stringrune := range s {
 		if (stringrune >= rune(65)) && (stringrune <= rune(90)) {
 			counter++
 		} else {
@@ -115,4 +180,16 @@ func removeIndex(s []string, index int) []string {
 	ret := make([]string, 0)
 	ret = append(ret, s[:index]...)
 	return append(ret, s[index+1:]...)
+}
+
+func IsNumeric(s string) bool {
+	counter := 0
+	for _, stringrune := range s {
+		if (stringrune >= rune(48)) && (stringrune <= rune(57)) {
+			counter++
+		} else {
+			return false
+		}
+	}
+	return true
 }
