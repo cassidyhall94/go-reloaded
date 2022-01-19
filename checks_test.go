@@ -181,8 +181,8 @@ func Test_checkupper(t *testing.T) {
 	}
 
 	test6 := checkupper("HEY (up)")
-	if !reflect.DeepEqual(test6, "HEY (up)") {
-		t.Logf("checkupper(\"HEY (up)\") failed, wanted \"%v\", got \"%v\"", "HEY (up)", test6)
+	if !reflect.DeepEqual(test6, "HEY") {
+		t.Logf("checkupper(\"HEY (up)\") failed, wanted \"%v\", got \"%v\"", "HEY", test6)
 		t.Fail()
 	}
 
@@ -221,8 +221,8 @@ func Test_checklower(t *testing.T) {
 	}
 
 	test6 := checklower("hey (low)")
-	if !reflect.DeepEqual(test6, "hey (low)") {
-		t.Logf("checklower(\"hey (low)\") failed, wanted \"%v\", got \"%v\"", "hey (low)", test6)
+	if !reflect.DeepEqual(test6, "hey") {
+		t.Logf("checklower(\"hey (low)\") failed, wanted \"%v\", got \"%v\"", "hey", test6)
 		t.Fail()
 	}
 
@@ -235,10 +235,56 @@ func Test_checklower(t *testing.T) {
 	}
 }
 
-func Test_checkN(t *testing.T) {
-	test1 := checkN("HEY THERE (low, 2)")
-	if !reflect.DeepEqual(test1, "hey there") {
-		t.Logf("checkN(\"HEY THERE (low, 2)\") failed, wanted \"%v\", got \"%v\"", "hey there", test1)
+func Test_checkcap(t *testing.T) {
+	test1 := checkcap("hey (cap)")
+	if !reflect.DeepEqual(test1, "Hey") {
+		t.Logf("checkcap(\"hey (cap)\") failed, wanted \"%v\", got \"%v\"", "Hey", test1)
+		t.Fail()
+	}
+
+	test2 := checkcap("Ready, set, go (cap) !")
+	if !reflect.DeepEqual(test2, "Ready, set, Go !") {
+		t.Logf("checkcap(\"Ready, set, go (cap) !\") failed, wanted \"%v\", got \"%v\"", "Ready, set, Go !", test2)
+		t.Fail()
+	}
+
+	test3 := checkcap("42 (cap)")
+	if !reflect.DeepEqual(test3, "42 (cap)") {
+		t.Logf("checkcap(\"42 (cap)\") failed, wanted \"%v\", got \"%v\"", "42 (cap)", test3)
+		t.Fail()
+	}
+
+	test4 := checkcap("hey cap")
+	if !reflect.DeepEqual(test4, "hey cap") {
+		t.Logf("checkcap(\"hey cap\") failed, wanted \"%v\", got \"%v\"", "hey cap", test4)
+		t.Fail()
+	}
+
+	test5 := checkcap("hey there (cap, 2)")
+	if !reflect.DeepEqual(test5, "Hey There") {
+		t.Logf("checkcap(\"hey there (cap, 2)\") failed, wanted \"%v\", got \"%v\"", "Hey There", test5)
+		t.Fail()
+	}
+
+	test6 := checkcap("Hey (cap)")
+	if !reflect.DeepEqual(test6, "Hey") {
+		t.Logf("checkcap(\"Hey (cap)\") failed, wanted \"%v\", got \"%v\"", "Hey", test6)
+		t.Fail()
+	}
+
+	test7In := "it (cap) was the best of times,"
+	test7Want := "It was the best of times,"
+	test7 := checkcap(test7In)
+	if !reflect.DeepEqual(test7, test7Want) {
+		t.Logf("checkcap(\"%s\") failed, wanted \"%s\", got \"%s\"", test7In, test7Want, test7)
 		t.Fail()
 	}
 }
+
+// func Test_checkN(t *testing.T) {
+// 	test1 := checkN("HEY THERE (low, 2)")
+// 	if !reflect.DeepEqual(test1, "hey there") {
+// 		t.Logf("checkN(\"HEY THERE (low, 2)\") failed, wanted \"%v\", got \"%v\"", "hey there", test1)
+// 		t.Fail()
+// 	}
+// }

@@ -135,3 +135,14 @@ func apos(aposrunes []rune) []rune {
 	// result = append(result)
 	return result
 }
+
+func acute(acuterunes []rune) []rune {
+	result := []rune{}
+	for i := range acuterunes {
+		if acuterunes[i] == '´' {
+			result = append(result, '´')
+		}
+	}
+	// result = append(result)
+	return result
+}

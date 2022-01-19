@@ -1,6 +1,7 @@
 package main
 
 import (
+	"strconv"
 	"strings"
 )
 
@@ -56,7 +57,7 @@ func checkupper(s string) string {
 		} else if len(splitS) == i {
 			break
 		}
-		if isLower(splitS[i-1]) && strings.Contains(splitS[i], "(up") {
+		if isUpper(splitS[i-1]) || isLower(splitS[i-1]) && strings.Contains(splitS[i], "(up)") {
 			result := upper([]rune(splitS[i-1]))
 			splitS[i-1] = string(result)
 			splitS = removeIndex(splitS, i)
@@ -74,7 +75,7 @@ func checklower(s string) string {
 		} else if len(splitS) == i {
 			break
 		}
-		if isUpper(splitS[i-1]) && strings.Contains(splitS[i], "(low)") {
+		if isUpper(splitS[i-1]) || isLower(splitS[i-1]) && strings.Contains(splitS[i], "(low)") {
 			result := lower([]rune(splitS[i-1]))
 			splitS[i-1] = string(result)
 			splitS = removeIndex(splitS, i)
@@ -92,10 +93,19 @@ func checkcap(s string) string {
 		} else if len(splitS) == i {
 			break
 		}
-		if isUpper(splitS[i-1]) && strings.Contains(splitS[i], "(cap)") {
+		if isCap(splitS[i-1]) && strings.Contains(splitS[i], "(cap)") {
 			result := cap([]rune(splitS[i-1]))
 			splitS[i-1] = string(result)
 			splitS = removeIndex(splitS, i)
+		} else if isCap(splitS[i-1]) && strings.Contains(splitS[i], "(cap,") {
+			n := splitS[i-1]
+			N, _ := strconv.Atoi(n)
+			for i := N; i > N; i-- {
+				result := cap([]rune(string(splitS[i-N])))
+				splitS[i-N] = string(result)
+				splitS = removeIndex(splitS, i)
+				splitS = removeIndex(splitS, i-N)
+			}
 		}
 	}
 	return strings.Join(splitS, " ")
@@ -103,54 +113,53 @@ func checkcap(s string) string {
 
 // loop through string, looking for (low/up/cap, n) and when found it implements the respective func for n strings before it
 
-func checkN(N string) string {
-	splitS := strings.Split(N, " ")
+// func checkN(N string) string {
+// 	splitS := strings.Split(N, " ")
 
-	for i := range splitS {
-		if i == 0 {
-			continue
-		} else if len(splitS) == i+1 {
-			break
-		}
-		if IsNumeric(splitS[i+1]) && strings.Contains(splitS[i], ", ") {
-			if strings.Contains(splitS[i], "(low") {
-				result := lower([]rune(splitS[i-1]))
-				splitS[i] = string(result)
-				splitS = removeIndex(splitS, i)
-				splitS = removeIndex(splitS, i+1)
-			}
-			if strings.Contains(splitS[i], "(up") {
-				result := upper([]rune(splitS[i-1]))
-				splitS[i] = string(result)
-				splitS = removeIndex(splitS, i)
-				splitS = removeIndex(splitS, i+1)
-			}
-			// if strings.Contains(splitS[i], "(cap") {
-			// 	result := cap([]rune(splitS[i-1]))
-			// 	splitS[i] = string(result)
-			// 	splitS = removeIndex(splitS, i)
-			// 	splitS = removeIndex(splitS, i+1)
-			// }
-
-		}
-	}
-	return strings.Join(splitS, " ")
-}
-
-// func isCap(s string) bool {
-// 	counter := 0
-// 	for _, stringrune := range s {
-// 		if (stringrune >= rune(65)) && (stringrune <= rune(90)) {
+// 	for i := range splitS {
+// 		if i == 0 {
 // 			continue
+// 		} else if len(splitS) == i+1 {
+// 			break
 // 		}
-// 			if (stringrune[i+1] >= rune(97)) && (stringrune[i+1] <= rune(122)) {
-// 			counter++
-// 		} else {
-// 			return false
+// 		if IsNumeric(splitS[i+1]) && strings.Contains(splitS[i], ", ") {
+// 			if strings.Contains(splitS[i], "(low") {
+// 				result := lower([]rune(splitS[i-1]))
+// 				splitS[i] = string(result)
+// 				splitS = removeIndex(splitS, i)
+// 				splitS = removeIndex(splitS, i+1)
+// 			}
+// 			if strings.Contains(splitS[i], "(up") {
+// 				result := upper([]rune(splitS[i-1]))
+// 				splitS[i] = string(result)
+// 				splitS = removeIndex(splitS, i)
+// 				splitS = removeIndex(splitS, i+1)
+// 			}
+// 			if strings.Contains(splitS[i], "(cap") {
+// 				result := cap([]rune(splitS[i-1]))
+// 				splitS[i] = string(result)
+// 				splitS = removeIndex(splitS, i)
+// 				splitS = removeIndex(splitS, i+1)
+// 			}
 // 		}
 // 	}
-// 	return true
+// 	return strings.Join(splitS, " ")
 // }
+
+func isCap(s string) bool {
+	counter := 0
+	for _, stringrune := range s {
+		if (stringrune >= rune(65)) && (stringrune <= rune(90)) {
+			continue
+		}
+		if (stringrune >= rune(97)) && (stringrune <= rune(122)) {
+			counter++
+		} else {
+			return false
+		}
+	}
+	return true
+}
 
 func isLower(s string) bool {
 	counter := 0

@@ -227,3 +227,29 @@ func Test_apos(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func Test_acute(t *testing.T) {
+	test1 := acute([]rune{32, '´', '´', 32})
+	if !reflect.DeepEqual(test1, []rune{'´', '´'}) {
+		t.Logf("acute([]rune{' ', '´', '´', ' '}) failed, wanted %v, got %v", []rune{'´', '´'}, test1)
+		t.Fail()
+	}
+
+	test2 := acute([]rune{'´', '´', 32})
+	if !reflect.DeepEqual(test2, []rune{'´', '´'}) {
+		t.Logf("acute([]rune{'´', '´', ' '}) failed, wanted %v, got %v", []rune{'´', '´'}, test2)
+		t.Fail()
+	}
+
+	test3 := acute([]rune{32, '´', '´'})
+	if !reflect.DeepEqual(test3, []rune{'´', '´'}) {
+		t.Logf("acute([]rune{' ', '´', '´'}) failed, wanted %v, got %v", []rune{'´', '´'}, test3)
+		t.Fail()
+	}
+
+	test4 := acute([]rune{32, 'a'})
+	if !reflect.DeepEqual(test4, []rune{}) {
+		t.Logf("acute([]rune{' ', 'a'}) failed, wanted %v, got %v", []rune{}, test4)
+		t.Fail()
+	}
+}
