@@ -1,4 +1,4 @@
-package main
+package goreloaded
 
 import (
 	"reflect"

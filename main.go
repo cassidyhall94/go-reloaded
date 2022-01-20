@@ -1,4 +1,4 @@
-package main
+package goreloaded
 
 import (
 	"fmt"
@@ -17,5 +17,6 @@ func main() {
 	if err != nil {
 		fmt.Printf("File name missing\n")
 	}
+	file = []byte(checkUpper(string(file)))
 	fmt.Print(string(file))
 }

@@ -1,5 +1,5 @@
 To run the program:
-make run
+go run ./... sample.txt
 
 To run the tests:
-make run-test
+go test ./...

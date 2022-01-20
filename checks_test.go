@@ -1,4 +1,4 @@
-package main
+package goreloaded
 
 import (
 	"reflect"
@@ -13,7 +13,7 @@ func Test_checkHex(t *testing.T) {
 		t.Log(err.Error())
 		t.Fail()
 	} else if !reflect.DeepEqual(test1, "66") {
-		t.Logf("checkhex(\"42 (hex)\") failed, wanted \"%v\", got \"%v\"", "66", test1)
+		t.Logf("checkHex(\"42 (hex)\") failed, wanted \"%v\", got \"%v\"", "66", test1)
 		t.Fail()
 	}
 
@@ -22,7 +22,7 @@ func Test_checkHex(t *testing.T) {
 		t.Log(err.Error())
 		t.Fail()
 	} else if !reflect.DeepEqual(test2, "42 (hox)") {
-		t.Logf("checkhex(\"42 (hox)\") failed, wanted \"%v\", got \"%v\"", "42 (hox)", test2)
+		t.Logf("checkHex(\"42 (hox)\") failed, wanted \"%v\", got \"%v\"", "42 (hox)", test2)
 		t.Fail()
 	}
 
@@ -31,7 +31,7 @@ func Test_checkHex(t *testing.T) {
 		t.Log(err.Error())
 		t.Fail()
 	} else if !reflect.DeepEqual(test3, "42 ()") {
-		t.Logf("checkhex(\"42 ()\") failed, wanted \"%v\", got \"%v\"", "42 ()", test3)
+		t.Logf("checkHex(\"42 ()\") failed, wanted \"%v\", got \"%v\"", "42 ()", test3)
 		t.Fail()
 	}
 
@@ -40,7 +40,7 @@ func Test_checkHex(t *testing.T) {
 		t.Log(err.Error())
 		t.Fail()
 	} else if !reflect.DeepEqual(test4, "42 hex") {
-		t.Logf("checkhex(\"42 hex\") failed, wanted \"%v\", got \"%v\"", "42 (hex)", test4)
+		t.Logf("checkHex(\"42 hex\") failed, wanted \"%v\", got \"%v\"", "42 (hex)", test4)
 		t.Fail()
 	}
 
@@ -55,7 +55,7 @@ func Test_checkHex(t *testing.T) {
 		t.Log(err.Error())
 		t.Fail()
 	} else if !reflect.DeepEqual(test6, "30") {
-		t.Logf("checkhex(\"1e (hex)\") failed, wanted \"%v\", got \"%v\"", "30", test6)
+		t.Logf("checkHex(\"1e (hex)\") failed, wanted \"%v\", got \"%v\"", "30", test6)
 		t.Fail()
 	}
 
@@ -66,7 +66,7 @@ func Test_checkHex(t *testing.T) {
 		t.Log(err.Error())
 		t.Fail()
 	} else if !reflect.DeepEqual(test7, test7Want) {
-		t.Logf("checkhex(\"%s\") failed, wanted \"%s\", got \"%s\"", test7In, test7Want, test7)
+		t.Logf("checkHex(\"%s\") failed, wanted \"%s\", got \"%s\"", test7In, test7Want, test7)
 		t.Fail()
 	}
 
@@ -77,7 +77,7 @@ func Test_checkHex(t *testing.T) {
 		t.Log(err.Error())
 		t.Fail()
 	} else if !reflect.DeepEqual(test8, test8Want) {
-		t.Logf("checkhex(\"%s\") failed, wanted \"%s\", got \"%s\"", test8In, test8Want, test8)
+		t.Logf("checkHex(\"%s\") failed, wanted \"%s\", got \"%s\"", test8In, test8Want, test8)
 		t.Fail()
 	}
 }
@@ -160,37 +160,37 @@ func Test_checkBin(t *testing.T) {
 func Test_checkUpper(t *testing.T) {
 	test1 := checkUpper("hey (up)")
 	if !reflect.DeepEqual(test1, "HEY") {
-		t.Logf("checkupper(\"hey (up)\") failed, wanted \"%v\", got \"%v\"", "HEY", test1)
+		t.Logf("checkUpper(\"hey (up)\") failed, wanted \"%v\", got \"%v\"", "HEY", test1)
 		t.Fail()
 	}
 
 	test2 := checkUpper("Ready, set, go (up, 2)")
 	if !reflect.DeepEqual(test2, "Ready, SET, GO") {
-		t.Logf("checkupper(\"Ready, set, go (up, 2)\") failed, wanted \"%v\", got \"%v\"", "Ready, SET, GO", test2)
+		t.Logf("checkUpper(\"Ready, set, go (up, 2)\") failed, wanted \"%v\", got \"%v\"", "Ready, SET, GO", test2)
 		t.Fail()
 	}
 
 	test3 := checkUpper("42 (up)")
 	if !reflect.DeepEqual(test3, "42 (up)") {
-		t.Logf("checkupper(\"42 (up)\") failed, wanted \"%v\", got \"%v\"", "42 (up)", test3)
+		t.Logf("checkUpper(\"42 (up)\") failed, wanted \"%v\", got \"%v\"", "42 (up)", test3)
 		t.Fail()
 	}
 
 	test4 := checkUpper("hey up")
 	if !reflect.DeepEqual(test4, "hey up") {
-		t.Logf("checkupper(\"hey up\") failed, wanted \"%v\", got \"%v\"", "hey up", test4)
+		t.Logf("checkUpper(\"hey up\") failed, wanted \"%v\", got \"%v\"", "hey up", test4)
 		t.Fail()
 	}
 
 	test5 := checkUpper("hey there (up, 2)")
 	if !reflect.DeepEqual(test5, "HEY THERE") {
-		t.Logf("checkupper(\"hey there (up, 2)\") failed, wanted \"%v\", got \"%v\"", "HEY THERE", test5)
+		t.Logf("checkUpper(\"hey there (up, 2)\") failed, wanted \"%v\", got \"%v\"", "HEY THERE", test5)
 		t.Fail()
 	}
 
 	test6 := checkUpper("HEY (up)")
 	if !reflect.DeepEqual(test6, "HEY") {
-		t.Logf("checkupper(\"HEY (up)\") failed, wanted \"%v\", got \"%v\"", "HEY", test6)
+		t.Logf("checkUpper(\"HEY (up)\") failed, wanted \"%v\", got \"%v\"", "HEY", test6)
 		t.Fail()
 	}
 
@@ -198,7 +198,7 @@ func Test_checkUpper(t *testing.T) {
 	test7Want := "it was the best of times, it was the worst OF TIMES ,"
 	test7 := checkUpper(test7In)
 	if !reflect.DeepEqual(test7, test7Want) {
-		t.Logf("checkupper(\"%s\") failed, wanted \"%s\", got \"%s\"", test7In, test7Want, test7)
+		t.Logf("checkUpper(\"%s\") failed, wanted \"%s\", got \"%s\"", test7In, test7Want, test7)
 		t.Fail()
 	}
 }
