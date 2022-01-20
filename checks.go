@@ -8,7 +8,7 @@ import (
 // func to look for (hex) and trigger the hex function
 // loop through string and replace number before (hex) to dec instead using hex function
 
-func checkhex(s string) (string, error) {
+func checkHex(s string) (string, error) {
 	splitS := strings.Split(s, " ")
 	hexvar := "(hex)"
 
@@ -27,7 +27,7 @@ func checkhex(s string) (string, error) {
 	return strings.Join(splitS, " "), nil
 }
 
-func checkbin(s string) (string, error) {
+func checkBin(s string) (string, error) {
 	splitS := strings.Split(s, " ")
 	binvar := "(bin)"
 
@@ -48,7 +48,7 @@ func checkbin(s string) (string, error) {
 
 // checkupper looks for any instances of (up) and replaces the string before with uppercase letters
 
-func checkupper(s string) string {
+func checkUpper(s string) string {
 	splitS := strings.Split(s, " ")
 
 	for i := range splitS {
@@ -57,16 +57,27 @@ func checkupper(s string) string {
 		} else if len(splitS) == i {
 			break
 		}
-		if isUpper(splitS[i-1]) || isLower(splitS[i-1]) && strings.Contains(splitS[i], "(up)") {
+		// if len(splitS) == 4 {
+		if isUpper(splitS[i-1]) && strings.Contains(splitS[i], "(up)") || isLower(splitS[i-1]) && strings.Contains(splitS[i], "(up)") {
 			result := upper([]rune(splitS[i-1]))
 			splitS[i-1] = string(result)
 			splitS = removeIndex(splitS, i)
+		} else if isUpper(splitS[i-1]) && strings.Contains(splitS[i], "(up,") || isLower(splitS[i-1]) && strings.Contains(splitS[i], "(up,") {
+			indexn := splitS[i+1]
+			n := indexn[:len(indexn)-1]
+			N, _ := strconv.Atoi(n)
+			for j := 1; j <= N; j++ {
+				result := upper([]rune(string(splitS[N-j])))
+				splitS[N-j] = string(result)
+				splitS = removeIndex(splitS, i)
+			}
 		}
+		// }
 	}
 	return strings.Join(splitS, " ")
 }
 
-func checklower(s string) string {
+func checkLower(s string) string {
 	splitS := strings.Split(s, " ")
 
 	for i := range splitS {
@@ -75,16 +86,27 @@ func checklower(s string) string {
 		} else if len(splitS) == i {
 			break
 		}
-		if isUpper(splitS[i-1]) || isLower(splitS[i-1]) && strings.Contains(splitS[i], "(low)") {
+		if isUpper(splitS[i-1]) && strings.Contains(splitS[i], "(low)") || isLower(splitS[i-1]) && strings.Contains(splitS[i], "(low)") {
 			result := lower([]rune(splitS[i-1]))
 			splitS[i-1] = string(result)
 			splitS = removeIndex(splitS, i)
+		} else if isUpper(splitS[i-1]) && strings.Contains(splitS[i], "(low,") || isLower(splitS[i-1]) && strings.Contains(splitS[i], "(low,") {
+			indexn := splitS[i+1]
+			n := indexn[:len(indexn)-1]
+			// n := splitS[i+1][0 : len(splitS[i+1])-1]
+			N, _ := strconv.Atoi(n)
+			for i := N; i > N; i-- {
+				result := lower([]rune(string(splitS[i-N])))
+				splitS[i-N] = string(result)
+				splitS = removeIndex(splitS, i)
+				splitS = removeIndex(splitS, i+1)
+			}
 		}
 	}
 	return strings.Join(splitS, " ")
 }
 
-func checkcap(s string) string {
+func checkCap(s string) string {
 	splitS := strings.Split(s, " ")
 
 	for i := range splitS {
@@ -98,53 +120,18 @@ func checkcap(s string) string {
 			splitS[i-1] = string(result)
 			splitS = removeIndex(splitS, i)
 		} else if isCap(splitS[i-1]) && strings.Contains(splitS[i], "(cap,") {
-			n := splitS[i-1]
+			n := splitS[i+1]
 			N, _ := strconv.Atoi(n)
 			for i := N; i > N; i-- {
 				result := cap([]rune(string(splitS[i-N])))
 				splitS[i-N] = string(result)
 				splitS = removeIndex(splitS, i)
-				splitS = removeIndex(splitS, i-N)
+				splitS = removeIndex(splitS, i+1)
 			}
 		}
 	}
 	return strings.Join(splitS, " ")
 }
-
-// loop through string, looking for (low/up/cap, n) and when found it implements the respective func for n strings before it
-
-// func checkN(N string) string {
-// 	splitS := strings.Split(N, " ")
-
-// 	for i := range splitS {
-// 		if i == 0 {
-// 			continue
-// 		} else if len(splitS) == i+1 {
-// 			break
-// 		}
-// 		if IsNumeric(splitS[i+1]) && strings.Contains(splitS[i], ", ") {
-// 			if strings.Contains(splitS[i], "(low") {
-// 				result := lower([]rune(splitS[i-1]))
-// 				splitS[i] = string(result)
-// 				splitS = removeIndex(splitS, i)
-// 				splitS = removeIndex(splitS, i+1)
-// 			}
-// 			if strings.Contains(splitS[i], "(up") {
-// 				result := upper([]rune(splitS[i-1]))
-// 				splitS[i] = string(result)
-// 				splitS = removeIndex(splitS, i)
-// 				splitS = removeIndex(splitS, i+1)
-// 			}
-// 			if strings.Contains(splitS[i], "(cap") {
-// 				result := cap([]rune(splitS[i-1]))
-// 				splitS[i] = string(result)
-// 				splitS = removeIndex(splitS, i)
-// 				splitS = removeIndex(splitS, i+1)
-// 			}
-// 		}
-// 	}
-// 	return strings.Join(splitS, " ")
-// }
 
 func isCap(s string) bool {
 	counter := 0

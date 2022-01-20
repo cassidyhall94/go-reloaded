@@ -5,13 +5,13 @@ import (
 	"testing"
 )
 
-func Test_hex(t *testing.T) {
+func Test_Hex(t *testing.T) {
 	test1, err := hex([]rune{'6', 'f'})
 	if err != nil {
 		t.Log(err.Error())
 		t.Fail()
 	} else if !reflect.DeepEqual(test1, []rune{'1', '1', '1'}) {
-		t.Logf("hex('6f') failed, wanted %v, got %v", []rune{'1', '1', '1'}, test1)
+		t.Logf("Hex('6f') failed, wanted %v, got %v", []rune{'1', '1', '1'}, test1)
 		t.Fail()
 	}
 
@@ -20,7 +20,7 @@ func Test_hex(t *testing.T) {
 		t.Log(err.Error())
 		t.Fail()
 	} else if !reflect.DeepEqual(test2, []rune{'6', '6'}) {
-		t.Logf("hex('42') failed, wanted %v, got %v", []rune{'6', '6'}, test2)
+		t.Logf("Hex('42') failed, wanted %v, got %v", []rune{'6', '6'}, test2)
 		t.Fail()
 	}
 
@@ -29,7 +29,7 @@ func Test_hex(t *testing.T) {
 		t.Log(err.Error())
 		t.Fail()
 	} else if !reflect.DeepEqual(test3, []rune{'1', '7', '2'}) {
-		t.Logf("hex('ac') failed, wanted %v, got %v", []rune{'1', '7', '2'}, test3)
+		t.Logf("Hex('ac') failed, wanted %v, got %v", []rune{'1', '7', '2'}, test3)
 		t.Fail()
 	}
 
@@ -40,13 +40,13 @@ func Test_hex(t *testing.T) {
 	}
 }
 
-func Test_bin(t *testing.T) {
+func Test_Bin(t *testing.T) {
 	test1, err := bin([]rune{'1', '1', '0', '0', '0', '0'})
 	if err != nil {
 		t.Log(err.Error())
 		t.Fail()
 	} else if !reflect.DeepEqual(test1, []rune{'4', '8'}) {
-		t.Logf("bin('110000') failed, wanted %v, got %v", []rune{'4', '8'}, test1)
+		t.Logf("Bin('110000') failed, wanted %v, got %v", []rune{'4', '8'}, test1)
 		t.Fail()
 	}
 
@@ -55,7 +55,7 @@ func Test_bin(t *testing.T) {
 		t.Log(err.Error())
 		t.Fail()
 	} else if !reflect.DeepEqual(test2, []rune{'2'}) {
-		t.Logf("bin('10') failed, wanted %v, got %v", []rune{'2'}, test2)
+		t.Logf("Bin('10') failed, wanted %v, got %v", []rune{'2'}, test2)
 		t.Fail()
 	}
 
@@ -66,7 +66,7 @@ func Test_bin(t *testing.T) {
 	}
 }
 
-func Test_cap(t *testing.T) {
+func Test_Cap(t *testing.T) {
 	test1 := cap([]rune{'i', 't'})
 	if !reflect.DeepEqual(test1, []rune{'I', 't'}) {
 		t.Logf("cap([]rune{'i', 't'}) failed, wanted %v, got %v", []rune{'I', 't'}, test1)
@@ -86,7 +86,7 @@ func Test_cap(t *testing.T) {
 	}
 }
 
-func Test_lower(t *testing.T) {
+func Test_Lower(t *testing.T) {
 	test1 := lower([]rune{'A'})
 	if !reflect.DeepEqual(test1, []rune{'a'}) {
 		t.Logf("lower([]rune{'A'}) failed, wanted %v, got %v", []rune{'a'}, test1)
@@ -106,7 +106,7 @@ func Test_lower(t *testing.T) {
 	}
 }
 
-func Test_upper(t *testing.T) {
+func Test_Upper(t *testing.T) {
 	test1 := upper([]rune{'a'})
 	if !reflect.DeepEqual(test1, []rune{'A'}) {
 		t.Logf("upper([]rune{'a'}) failed, wanted %v, got %v", []rune{'A'}, test1)
@@ -126,7 +126,7 @@ func Test_upper(t *testing.T) {
 	}
 }
 
-func Test_a(t *testing.T) {
+func Test_A(t *testing.T) {
 	test1 := a([]rune{'a'})
 	if !reflect.DeepEqual(test1, []rune{'a', 'n'}) {
 		t.Logf("a([]rune{'a'}) failed, wanted %v, got %v", []rune{'a', 'n'}, test1)
@@ -146,7 +146,7 @@ func Test_a(t *testing.T) {
 	}
 }
 
-func Test_punc(t *testing.T) {
+func Test_Punc(t *testing.T) {
 	test1 := punc([]rune{' ', ','})
 	if !reflect.DeepEqual(test1, []rune{',', ' '}) {
 		t.Logf("punc([]rune{' ', ','}) failed, wanted %v, got %v", []rune{',', ' '}, test1)
@@ -202,7 +202,7 @@ func Test_punc(t *testing.T) {
 	}
 }
 
-func Test_apos(t *testing.T) {
+func Test_Apos(t *testing.T) {
 	test1 := apos([]rune{32, 39, 39, 32})
 	if !reflect.DeepEqual(test1, []rune{39, 39}) {
 		t.Logf("apos([]rune{' ', ''', ''', ' '}) failed, wanted %v, got %v", []rune{39, 39}, test1)
@@ -228,7 +228,7 @@ func Test_apos(t *testing.T) {
 	}
 }
 
-func Test_acute(t *testing.T) {
+func Test_Acute(t *testing.T) {
 	test1 := acute([]rune{32, '´', '´', 32})
 	if !reflect.DeepEqual(test1, []rune{'´', '´'}) {
 		t.Logf("acute([]rune{' ', '´', '´', ' '}) failed, wanted %v, got %v", []rune{'´', '´'}, test1)
