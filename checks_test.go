@@ -166,7 +166,7 @@ func Test_checkUpper(t *testing.T) {
 
 	test2 := checkUpper("Ready, set, go (up, 2)")
 	if !reflect.DeepEqual(test2, "Ready, SET, GO") {
-		t.Logf("checkupper(\"Ready, set, go (up, 2) !\") failed, wanted \"%v\", got \"%v\"", "Ready, SET, GO", test2)
+		t.Logf("checkupper(\"Ready, set, go (up, 2)\") failed, wanted \"%v\", got \"%v\"", "Ready, SET, GO", test2)
 		t.Fail()
 	}
 
@@ -194,8 +194,8 @@ func Test_checkUpper(t *testing.T) {
 		t.Fail()
 	}
 
-	test7In := "it was the best of times, it was the worst of times (up) ,"
-	test7Want := "it was the best of times, it was the worst of TIMES ,"
+	test7In := "it was the best of times, it was the worst of times (up, 2) ,"
+	test7Want := "it was the best of times, it was the worst OF TIMES ,"
 	test7 := checkUpper(test7In)
 	if !reflect.DeepEqual(test7, test7Want) {
 		t.Logf("checkupper(\"%s\") failed, wanted \"%s\", got \"%s\"", test7In, test7Want, test7)

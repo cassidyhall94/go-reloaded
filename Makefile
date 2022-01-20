@@ -1,5 +1,5 @@
 run:
 	go run ./...
 
-test:
+run-test:
 	go test ./...

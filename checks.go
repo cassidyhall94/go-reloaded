@@ -54,10 +54,9 @@ func checkUpper(s string) string {
 	for i := range splitS {
 		if i == 0 {
 			continue
-		} else if len(splitS) == i {
+		} else if len(splitS) == i-1 || len(splitS) == i {
 			break
 		}
-		// if len(splitS) == 4 {
 		if isUpper(splitS[i-1]) && strings.Contains(splitS[i], "(up)") || isLower(splitS[i-1]) && strings.Contains(splitS[i], "(up)") {
 			result := upper([]rune(splitS[i-1]))
 			splitS[i-1] = string(result)
@@ -66,13 +65,14 @@ func checkUpper(s string) string {
 			indexn := splitS[i+1]
 			n := indexn[:len(indexn)-1]
 			N, _ := strconv.Atoi(n)
-			for j := 1; j <= N; j++ {
-				result := upper([]rune(string(splitS[N-j])))
-				splitS[N-j] = string(result)
+			counter := 0
+			for j := len(splitS[:i]); counter < N; j-- {
+				result := upper([]rune(splitS[j-1]))
+				splitS[j-1] = string(result)
 				splitS = removeIndex(splitS, i)
+				counter++
 			}
 		}
-		// }
 	}
 	return strings.Join(splitS, " ")
 }
