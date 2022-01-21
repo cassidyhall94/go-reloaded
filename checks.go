@@ -1,4 +1,4 @@
-package goreloaded
+package main
 
 import (
 	"strconv"
@@ -83,23 +83,23 @@ func checkLower(s string) string {
 	for i := range splitS {
 		if i == 0 {
 			continue
-		} else if len(splitS) == i {
+		} else if len(splitS) == i-1 || len(splitS) == i {
 			break
 		}
 		if isUpper(splitS[i-1]) && strings.Contains(splitS[i], "(low)") || isLower(splitS[i-1]) && strings.Contains(splitS[i], "(low)") {
 			result := lower([]rune(splitS[i-1]))
 			splitS[i-1] = string(result)
 			splitS = removeIndex(splitS, i)
-		} else if isUpper(splitS[i-1]) && strings.Contains(splitS[i], "(low,") || isLower(splitS[i-1]) && strings.Contains(splitS[i], "(low,") {
+		} else if isUpper(splitS[i-1]) && strings.Contains(splitS[i], "(low,") || isLower(splitS[i-1]) && strings.Contains(splitS[i], "(low),") {
 			indexn := splitS[i+1]
 			n := indexn[:len(indexn)-1]
-			// n := splitS[i+1][0 : len(splitS[i+1])-1]
 			N, _ := strconv.Atoi(n)
-			for i := N; i > N; i-- {
-				result := lower([]rune(string(splitS[i-N])))
-				splitS[i-N] = string(result)
+			counter := 0
+			for j := len(splitS[:i]); counter < N; j-- {
+				result := lower([]rune(splitS[j-1]))
+				splitS[j-1] = string(result)
 				splitS = removeIndex(splitS, i)
-				splitS = removeIndex(splitS, i+1)
+				counter++
 			}
 		}
 	}
@@ -112,7 +112,7 @@ func checkCap(s string) string {
 	for i := range splitS {
 		if i == 0 {
 			continue
-		} else if len(splitS) == i {
+		} else if len(splitS) == i || len(splitS) == i-1 {
 			break
 		}
 		if isCap(splitS[i-1]) && strings.Contains(splitS[i], "(cap)") {
@@ -120,18 +120,38 @@ func checkCap(s string) string {
 			splitS[i-1] = string(result)
 			splitS = removeIndex(splitS, i)
 		} else if isCap(splitS[i-1]) && strings.Contains(splitS[i], "(cap,") {
-			n := splitS[i+1]
+			indexn := splitS[i+1]
+			n := indexn[:len(indexn)-1]
 			N, _ := strconv.Atoi(n)
-			for i := N; i > N; i-- {
-				result := cap([]rune(string(splitS[i-N])))
-				splitS[i-N] = string(result)
+			counter := 0
+			for j := len(splitS[:i]); counter < N; j-- {
+				result := cap([]rune(splitS[j-1]))
+				splitS[j-1] = string(result)
 				splitS = removeIndex(splitS, i)
-				splitS = removeIndex(splitS, i+1)
+				counter++
 			}
 		}
 	}
 	return strings.Join(splitS, " ")
 }
+
+// func checkA(s string) string {
+// 	splitS := strings.Split(s, " ")
+
+// 	for i := range splitS {
+// 		if i == 0 {
+// 			continue
+// 		} else if len(splitS) == i {
+// 			break
+// 		}
+// 		if isA(splitS[i]) {
+// 			result := a([]rune(splitS[i]))
+// 			splitS[i] = string(result)
+// 			fmt.Println(string(result))
+// 		}
+// 	}
+// 	return strings.Join(splitS, " ")
+// }
 
 func isCap(s string) bool {
 	counter := 0
@@ -189,3 +209,15 @@ func IsNumeric(s string) bool {
 	}
 	return true
 }
+
+// func isA(s string) bool {
+// 	counter := 0
+// 	for _, stringrune := range s {
+// 		if (stringrune == rune(97)) || (stringrune == rune(65)) {
+// 			counter++
+// 		} else {
+// 			return false
+// 		}
+// 	}
+// 	return true
+// }

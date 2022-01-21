@@ -1,4 +1,4 @@
-package goreloaded
+package main
 
 import (
 	"reflect"
@@ -142,6 +142,12 @@ func Test_A(t *testing.T) {
 	test3 := a([]rune{'A'})
 	if !reflect.DeepEqual(test3, []rune{'A', 'n'}) {
 		t.Logf("a([]rune{'A'}) failed, wanted %v, got %v", []rune{'A', 'n'}, test3)
+		t.Fail()
+	}
+
+	test4 := a([]rune(string("I am a optimist")))
+	if !reflect.DeepEqual(test4, (string("I am an optimist"))) {
+		t.Logf("a([]rune(string('I am a optimist'))) failed, wanted %v, got %v", string("I am an optimist"), test4)
 		t.Fail()
 	}
 }
