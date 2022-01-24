@@ -294,29 +294,3 @@ func Test_checkCap(t *testing.T) {
 		t.Fail()
 	}
 }
-
-// func Test_checkA(t *testing.T) {
-// 	test1 := checkA("a")
-// 	if !reflect.DeepEqual(test1, "an") {
-// 		t.Logf("checkA('a') failed, wanted \"%v\", got \"%v\"", "an", test1)
-// 		t.Fail()
-// 	}
-
-// 	test2 := checkA("1")
-// 	if !reflect.DeepEqual(test2, "") {
-// 		t.Logf("checkA('1') failed, wanted \"%v\", got \"%v\"", "", test2)
-// 		t.Fail()
-// 	}
-
-// 	test3 := checkA("A")
-// 	if !reflect.DeepEqual(test3, []rune{'A', 'n'}) {
-// 		t.Logf("checkA('A') failed, wanted \"%v\", got \"%v\"", "An", test3)
-// 		t.Fail()
-// 	}
-
-// 	test4 := checkA("I am a optimist")
-// 	if !reflect.DeepEqual(test4, (string("I am an optimist"))) {
-// 		t.Logf("checkA('I am a optimist') failed, wanted \"%v\", got \"%v\"", "I am an optimist", test4)
-// 		t.Fail()
-// 	}
-// }

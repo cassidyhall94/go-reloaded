@@ -74,28 +74,20 @@ func upper(upperrunes []rune) []rune {
 	return upperrunes
 }
 
-func a([]rune) []rune {
-	result := []rune{}
+
+
+func a(arunes []rune) []rune {
+	result := arunes
 	for i := range result {
-		if result[i] == rune(97) && result[i+1] == rune(111) {
-			return []rune{'a' + 'n'}
+		if result[i] == rune(97) {
+			return []rune{'a', 'n'}
+		}
+		if result[i] == rune(65) {
+			return []rune{'A', 'n'}
 		}
 	}
-	return result
+	return []rune{}
 }
-
-// func a(arunes []rune) []rune {
-// 	result := arunes
-// 	for i := range result {
-// 		if result[i] == rune(97) {
-// 			return []rune{'a', 'n'}
-// 		}
-// 		if result[i] == rune(65) {
-// 			return []rune{'A', 'n'}
-// 		}
-// 	}
-// 	return []rune{}
-// }
 
 // starting with an empty slice of runes as result
 // for each element in the rune slice, if there's a space, ignore it.

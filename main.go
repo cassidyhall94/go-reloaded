@@ -22,9 +22,9 @@ func main() {
 	filebin, _ := checkBin(string(file))
 	file = []byte(filebin)
 
-	// fileacon := []rune(string(file))
-	// filetransform := acute(fileacon)
-	// file = []byte(string(filetransform))
+	file = []byte(checkA(string(file)))
+
+	file = []byte(checkPunc(string(file)))
 
 	// print file after transforming functions applied with a new line
 	fmt.Print(string(file))
