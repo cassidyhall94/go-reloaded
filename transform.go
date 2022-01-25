@@ -94,57 +94,57 @@ func a(arunes []rune) []rune {
 // if there's a puncuation mark, append to result
 // add space to end of result and return result
 
-func punc(puncrunes []rune) []rune {
-	result := []rune{}
-	for i := range puncrunes {
-		if puncrunes[i] == rune(46) {
-			result = append(result, rune(46))
-		}
-		if puncrunes[i] == rune(44) {
-			result = append(result, rune(44))
-		}
-		if puncrunes[i] == rune(33) {
-			result = append(result, rune(33))
-		}
-		if puncrunes[i] == rune(63) {
-			result = append(result, rune(63))
-		}
-		if puncrunes[i] == rune(58) {
-			result = append(result, rune(58))
-		}
-		if puncrunes[i] == rune(59) {
-			result = append(result, rune(59))
-		}
-	}
-	if string(result) != "" {
-		result = append(result, rune(32))
-	}
-	return result
-}
+// func punc(puncrunes []rune) []rune {
+// 	result := []rune{}
+// 	for i := range puncrunes {
+// 		if puncrunes[i] == rune(46) {
+// 			result = append(result, rune(46))
+// 		}
+// 		if puncrunes[i] == rune(44) {
+// 			result = append(result, rune(44))
+// 		}
+// 		if puncrunes[i] == rune(33) {
+// 			result = append(result, rune(33))
+// 		}
+// 		if puncrunes[i] == rune(63) {
+// 			result = append(result, rune(63))
+// 		}
+// 		if puncrunes[i] == rune(58) {
+// 			result = append(result, rune(58))
+// 		}
+// 		if puncrunes[i] == rune(59) {
+// 			result = append(result, rune(59))
+// 		}
+// 	}
+// 	if string(result) != "" {
+// 		result = append(result, rune(32))
+// 	}
+// 	return result
+// }
 
 // starting with an empty slice of runes as result
 // for each element in the rune slice, if there's a space, ignore it.
 // if there's a puncuation mark, append to result
 // add space to end of result and return result
 
-func apos(aposrunes []rune) []rune {
-	result := []rune{}
-	for i := range aposrunes {
-		if aposrunes[i] == rune(39) {
-			result = append(result, rune(39))
-		}
-	}
-	// result = append(result)
-	return result
-}
+// func apos(aposrunes []rune) []rune {
+// 	result := []rune{}
+// 	for i := range aposrunes {
+// 		if aposrunes[i] == rune(39) {
+// 			result = append(result, rune(39))
+// 		}
+// 	}
+// 	// result = append(result)
+// 	return result
+// }
 
-func acute(acuterunes []rune) []rune {
-	result := []rune{}
-	for i := range acuterunes {
-		if acuterunes[i] == '´' {
-			result = append(result, '´')
-		}
-	}
-	// result = append(result)
-	return result
-}
+// func acute(acuterunes []rune) []rune {
+// 	result := []rune{}
+// 	for i := range acuterunes {
+// 		if acuterunes[i] == '´' {
+// 			result = append(result, '´')
+// 		}
+// 	}
+// 	// result = append(result)
+// 	return result
+// }

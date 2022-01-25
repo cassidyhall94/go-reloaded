@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 )
 
@@ -16,17 +17,30 @@ func main() {
 	file = []byte(checkLower(string(file)))
 	file = []byte(checkCap(string(file)))
 
-	filehex, _ := checkHex(string(file))
+	filehex, err := checkHex(string(file))
+	if err != nil {
+		log.Fatal(err)
+	}
 	file = []byte(filehex)
 
-	filebin, _ := checkBin(string(file))
+	filebin, err := checkBin(string(file))
+	if err != nil {
+		log.Fatal(err)
+	}
 	file = []byte(filebin)
 
 	file = []byte(checkA(string(file)))
 
 	file = []byte(checkPunc(string(file)))
 
+	file = []byte(checkApos(string(file)))
+
 	// print file after transforming functions applied with a new line
-	fmt.Print(string(file))
-	fmt.Print("\n")
+	// fmt.Print(string(file))
+	// fmt.Print("\n")
+
+	err = os.WriteFile("result.txt", file, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
 }

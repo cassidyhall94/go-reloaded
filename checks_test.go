@@ -274,9 +274,9 @@ func Test_checkCap(t *testing.T) {
 		t.Fail()
 	}
 
-	test5 := checkCap("hey there (cap, 2)")
-	if !reflect.DeepEqual(test5, "Hey There") {
-		t.Logf("checkCap(\"hey there (cap, 2)\") failed, wanted \"%v\", got \"%v\"", "Hey There", test5)
+	test5 := checkCap("harold wilson (cap, 2) : ' I am a optimist ,but a optimist who carries a raincoat . '")
+	if !reflect.DeepEqual(test5, "Harold Wilson : ' I am a optimist ,but a optimist who carries a raincoat . '") {
+		t.Logf("checkCap(\"harold wilson (cap, 2) : ' I am a optimist ,but a optimist who carries a raincoat . '\") failed, wanted \"%v\", got \"%v\"", "Harold Wilson : ' I am a optimist ,but a optimist who carries a raincoat . '", test5)
 		t.Fail()
 	}
 

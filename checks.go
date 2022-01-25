@@ -110,7 +110,6 @@ func checkLower(s string) string {
 
 func checkCap(s string) string {
 	splitS := strings.Split(s, " ")
-
 	for i := range splitS {
 		if i == 0 {
 			continue
@@ -148,7 +147,7 @@ func checkA(s string) string {
 	for i := range splitS {
 		if i == 0 {
 			continue
-		} else if len(splitS) == i {
+		} else if len(splitS) == i || len(splitS) == i-1 {
 			break
 		}
 		if isA(splitS[i]) && isVowel(splitS[i+1]) {
@@ -165,6 +164,11 @@ func checkPunc(s string) string {
 	srunes := []rune(s)
 	removed := 0
 	for i, r := range srunes {
+		if i == 0 {
+			continue
+		} else if len(srunes) == i || len(srunes) == i-1 {
+			break
+		}
 		if isPunc(r) {
 			if srunes[i-(1+removed)] == ' ' {
 				srunes = removeIndexrune(srunes, i-(1+removed))
@@ -173,6 +177,11 @@ func checkPunc(s string) string {
 		}
 	}
 	for i, r := range srunes {
+		if i == 0 {
+			continue
+		} else if len(srunes) == i || len(srunes) == i+1 {
+			break
+		}
 		if isPunc(r) {
 			if srunes[i+1] != ' ' {
 				srunes = insert(srunes, rune(32), i+1)
@@ -180,6 +189,45 @@ func checkPunc(s string) string {
 		}
 	}
 	return string(srunes)
+}
+
+func checkApos(s string) string {
+	// for apos, it should have no space after it
+	// loop through s to find ' and look one after, if it is a space then remove for first instance, for second instance, the space should not be before '
+
+	aposrunes := []rune(s)
+	toRemove := []int{}
+	lookingForSecondApos := false
+	for i, r := range aposrunes {
+		if i == 0 {
+			continue
+		}
+		if isApos(r) {
+			if aposrunes[i-1] == ' ' && lookingForSecondApos {
+				toRemove = append(toRemove, i-1)
+				lookingForSecondApos = false
+			} else if aposrunes[i+1] == ' ' && !lookingForSecondApos {
+				toRemove = append(toRemove, i+1)
+				lookingForSecondApos = true
+			}
+		}
+	}
+	removed := 0
+	for _, i := range toRemove {
+		aposrunes = removeIndexrune(aposrunes, i-removed)
+		removed++
+	}
+	return string(aposrunes)
+}
+
+func isApos(s rune) bool {
+	switch s {
+
+	case rune(39):
+		return true
+	default:
+		return false
+	}
 }
 
 func isPunc(s rune) bool {

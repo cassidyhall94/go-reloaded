@@ -146,110 +146,110 @@ func Test_A(t *testing.T) {
 	}
 }
 
-func Test_Punc(t *testing.T) {
-	test1 := punc([]rune{' ', ','})
-	if !reflect.DeepEqual(test1, []rune{',', ' '}) {
-		t.Logf("punc([]rune{' ', ','}) failed, wanted %v, got %v", []rune{',', ' '}, test1)
-		t.Fail()
-	}
+// func Test_Punc(t *testing.T) {
+// 	test1 := punc([]rune{' ', ','})
+// 	if !reflect.DeepEqual(test1, []rune{',', ' '}) {
+// 		t.Logf("punc([]rune{' ', ','}) failed, wanted %v, got %v", []rune{',', ' '}, test1)
+// 		t.Fail()
+// 	}
 
-	test2 := punc([]rune{' ', '.', '.', '.', ' '})
-	if !reflect.DeepEqual(test2, []rune{'.', '.', '.', ' '}) {
-		t.Logf("punc([]rune{' ', '.', '.', '.', ' '}) failed, wanted %v, got %v", []rune{'.', '.', '.', ' '}, test2)
-		t.Fail()
-	}
+// 	test2 := punc([]rune{' ', '.', '.', '.', ' '})
+// 	if !reflect.DeepEqual(test2, []rune{'.', '.', '.', ' '}) {
+// 		t.Logf("punc([]rune{' ', '.', '.', '.', ' '}) failed, wanted %v, got %v", []rune{'.', '.', '.', ' '}, test2)
+// 		t.Fail()
+// 	}
 
-	test3 := punc([]rune{' ', '.'})
-	if !reflect.DeepEqual(test3, []rune{'.', ' '}) {
-		t.Logf("punc([]rune{' ', '.'}) failed, wanted %v, got %v", []rune{'.', ' '}, test3)
-		t.Fail()
-	}
+// 	test3 := punc([]rune{' ', '.'})
+// 	if !reflect.DeepEqual(test3, []rune{'.', ' '}) {
+// 		t.Logf("punc([]rune{' ', '.'}) failed, wanted %v, got %v", []rune{'.', ' '}, test3)
+// 		t.Fail()
+// 	}
 
-	test4 := punc([]rune{' ', '!'})
-	if !reflect.DeepEqual(test4, []rune{'!', ' '}) {
-		t.Logf("punc([]rune{' ', '!'}) failed, wanted %v, got %v", []rune{'!', ' '}, test4)
-		t.Fail()
-	}
+// 	test4 := punc([]rune{' ', '!'})
+// 	if !reflect.DeepEqual(test4, []rune{'!', ' '}) {
+// 		t.Logf("punc([]rune{' ', '!'}) failed, wanted %v, got %v", []rune{'!', ' '}, test4)
+// 		t.Fail()
+// 	}
 
-	test5 := punc([]rune{' ', '?'})
-	if !reflect.DeepEqual(test5, []rune{'?', ' '}) {
-		t.Logf("punc([]rune{' ', '?'}) failed, wanted %v, got %v", []rune{'?', ' '}, test5)
-		t.Fail()
-	}
+// 	test5 := punc([]rune{' ', '?'})
+// 	if !reflect.DeepEqual(test5, []rune{'?', ' '}) {
+// 		t.Logf("punc([]rune{' ', '?'}) failed, wanted %v, got %v", []rune{'?', ' '}, test5)
+// 		t.Fail()
+// 	}
 
-	test6 := punc([]rune{' ', ':'})
-	if !reflect.DeepEqual(test6, []rune{':', ' '}) {
-		t.Logf("punc([]rune{' ', ':'}) failed, wanted %v, got %v", []rune{':', ' '}, test6)
-		t.Fail()
-	}
+// 	test6 := punc([]rune{' ', ':'})
+// 	if !reflect.DeepEqual(test6, []rune{':', ' '}) {
+// 		t.Logf("punc([]rune{' ', ':'}) failed, wanted %v, got %v", []rune{':', ' '}, test6)
+// 		t.Fail()
+// 	}
 
-	test7 := punc([]rune{' ', ';'})
-	if !reflect.DeepEqual(test7, []rune{';', ' '}) {
-		t.Logf("punc([]rune{' ', ';'}) failed, wanted %v, got %v", []rune{';', ' '}, test7)
-		t.Fail()
-	}
+// 	test7 := punc([]rune{' ', ';'})
+// 	if !reflect.DeepEqual(test7, []rune{';', ' '}) {
+// 		t.Logf("punc([]rune{' ', ';'}) failed, wanted %v, got %v", []rune{';', ' '}, test7)
+// 		t.Fail()
+// 	}
 
-	test8 := punc([]rune{' ', '!', '?', ' '})
-	if !reflect.DeepEqual(test8, []rune{'!', '?', ' '}) {
-		t.Logf("punc([]rune{' ', '!', '?', ' '}) failed, wanted %v, got %v", []rune{'!', '?', ' '}, test8)
-		t.Fail()
-	}
+// 	test8 := punc([]rune{' ', '!', '?', ' '})
+// 	if !reflect.DeepEqual(test8, []rune{'!', '?', ' '}) {
+// 		t.Logf("punc([]rune{' ', '!', '?', ' '}) failed, wanted %v, got %v", []rune{'!', '?', ' '}, test8)
+// 		t.Fail()
+// 	}
 
-	test9 := punc([]rune{' ', 'a'})
-	if !reflect.DeepEqual(test9, []rune{}) {
-		t.Logf("punc([]rune{' ', 'a'}) failed, wanted %v, got %v", []rune{}, test9)
-		t.Fail()
-	}
-}
+// 	test9 := punc([]rune{' ', 'a'})
+// 	if !reflect.DeepEqual(test9, []rune{}) {
+// 		t.Logf("punc([]rune{' ', 'a'}) failed, wanted %v, got %v", []rune{}, test9)
+// 		t.Fail()
+// 	}
+// }
 
-func Test_Apos(t *testing.T) {
-	test1 := apos([]rune{32, 39, 39, 32})
-	if !reflect.DeepEqual(test1, []rune{39, 39}) {
-		t.Logf("apos([]rune{' ', ''', ''', ' '}) failed, wanted %v, got %v", []rune{39, 39}, test1)
-		t.Fail()
-	}
+// func Test_Apos(t *testing.T) {
+// 	test1 := apos([]rune{32, 39, 39, 32})
+// 	if !reflect.DeepEqual(test1, []rune{39, 39}) {
+// 		t.Logf("apos([]rune{' ', ''', ''', ' '}) failed, wanted %v, got %v", []rune{39, 39}, test1)
+// 		t.Fail()
+// 	}
 
-	test2 := apos([]rune{39, 39, 32})
-	if !reflect.DeepEqual(test2, []rune{39, 39}) {
-		t.Logf("apos([]rune{''', ''', ' '}) failed, wanted %v, got %v", []rune{39, 39}, test2)
-		t.Fail()
-	}
+// 	test2 := apos([]rune{39, 39, 32})
+// 	if !reflect.DeepEqual(test2, []rune{39, 39}) {
+// 		t.Logf("apos([]rune{''', ''', ' '}) failed, wanted %v, got %v", []rune{39, 39}, test2)
+// 		t.Fail()
+// 	}
 
-	test3 := apos([]rune{32, 39, 39})
-	if !reflect.DeepEqual(test3, []rune{39, 39}) {
-		t.Logf("apos([]rune{' ', ''', '''}) failed, wanted %v, got %v", []rune{39, 39}, test3)
-		t.Fail()
-	}
+// 	test3 := apos([]rune{32, 39, 39})
+// 	if !reflect.DeepEqual(test3, []rune{39, 39}) {
+// 		t.Logf("apos([]rune{' ', ''', '''}) failed, wanted %v, got %v", []rune{39, 39}, test3)
+// 		t.Fail()
+// 	}
 
-	test4 := apos([]rune{32, 'a'})
-	if !reflect.DeepEqual(test4, []rune{}) {
-		t.Logf("apos([]rune{' ', 'a'}) failed, wanted %v, got %v", []rune{}, test4)
-		t.Fail()
-	}
-}
+// 	test4 := apos([]rune{32, 'a'})
+// 	if !reflect.DeepEqual(test4, []rune{}) {
+// 		t.Logf("apos([]rune{' ', 'a'}) failed, wanted %v, got %v", []rune{}, test4)
+// 		t.Fail()
+// 	}
+// }
 
-func Test_Acute(t *testing.T) {
-	test1 := acute([]rune{32, '´', '´', 32})
-	if !reflect.DeepEqual(test1, []rune{'´', '´'}) {
-		t.Logf("acute([]rune{' ', '´', '´', ' '}) failed, wanted %v, got %v", []rune{'´', '´'}, test1)
-		t.Fail()
-	}
+// func Test_Acute(t *testing.T) {
+// 	test1 := acute([]rune{32, '´', '´', 32})
+// 	if !reflect.DeepEqual(test1, []rune{'´', '´'}) {
+// 		t.Logf("acute([]rune{' ', '´', '´', ' '}) failed, wanted %v, got %v", []rune{'´', '´'}, test1)
+// 		t.Fail()
+// 	}
 
-	test2 := acute([]rune{'´', '´', 32})
-	if !reflect.DeepEqual(test2, []rune{'´', '´'}) {
-		t.Logf("acute([]rune{'´', '´', ' '}) failed, wanted %v, got %v", []rune{'´', '´'}, test2)
-		t.Fail()
-	}
+// 	test2 := acute([]rune{'´', '´', 32})
+// 	if !reflect.DeepEqual(test2, []rune{'´', '´'}) {
+// 		t.Logf("acute([]rune{'´', '´', ' '}) failed, wanted %v, got %v", []rune{'´', '´'}, test2)
+// 		t.Fail()
+// 	}
 
-	test3 := acute([]rune{32, '´', '´'})
-	if !reflect.DeepEqual(test3, []rune{'´', '´'}) {
-		t.Logf("acute([]rune{' ', '´', '´'}) failed, wanted %v, got %v", []rune{'´', '´'}, test3)
-		t.Fail()
-	}
+// 	test3 := acute([]rune{32, '´', '´'})
+// 	if !reflect.DeepEqual(test3, []rune{'´', '´'}) {
+// 		t.Logf("acute([]rune{' ', '´', '´'}) failed, wanted %v, got %v", []rune{'´', '´'}, test3)
+// 		t.Fail()
+// 	}
 
-	test4 := acute([]rune{32, 'a'})
-	if !reflect.DeepEqual(test4, []rune{}) {
-		t.Logf("acute([]rune{' ', 'a'}) failed, wanted %v, got %v", []rune{}, test4)
-		t.Fail()
-	}
-}
+// 	test4 := acute([]rune{32, 'a'})
+// 	if !reflect.DeepEqual(test4, []rune{}) {
+// 		t.Logf("acute([]rune{' ', 'a'}) failed, wanted %v, got %v", []rune{}, test4)
+// 		t.Fail()
+// 	}
+// }
